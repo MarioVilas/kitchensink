@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>bincodes.extract</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;bincodes ::
+        Module&nbsp;extract
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="bincodes.extract-module.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== MODULE DESCRIPTION ==================== -->
+<h1 class="epydoc">Module extract</h1><p class="nomargin-top"><span class="codelink"><a href="bincodes.extract-pysrc.html">source&nbsp;code</a></span></p>
+<p>Extract credit card numbers from plain text files.</p>
+
+<!-- ==================== FUNCTIONS ==================== -->
+<a name="section-Functions"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Functions</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Functions"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">bool</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bincodes.extract-module.html#is_luhn_valid" class="summary-sig-name">is_luhn_valid</a>(<span class="summary-sig-arg">cc</span>)</span><br />
+      Validate a credit card number using the Luhn algorithm.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bincodes.extract-pysrc.html#is_luhn_valid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">str</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bincodes.extract-module.html#strip" class="summary-sig-name">strip</a>(<span class="summary-sig-arg">cc</span>)</span><br />
+      Strip all non numeric characters.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bincodes.extract-pysrc.html#strip">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">iterator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bincodes.extract-module.html#extract" class="summary-sig-name">extract</a>(<span class="summary-sig-arg">data</span>,
+        <span class="summary-sig-arg">rcc</span>=<span class="summary-sig-default">re.compile(r'\b<code class="re-group">(?:</code>\d<code class="re-group">[</code> <code class="re-op">-</code>;,\.:\t\r\n<code class="re-group">]</code><code class="re-op">*?</code><code class="re-group">)</code><code class="re-op">{13,16}</code>\b')</span>)</span><br />
+      Extract credit card numbers from plain text data.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bincodes.extract-pysrc.html#extract">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">iterator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bincodes.extract-module.html#bruteforce" class="summary-sig-name">bruteforce</a>(<span class="summary-sig-arg">data</span>)</span><br />
+      Extract credit card numbers from plain text data by brute force.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bincodes.extract-pysrc.html#bruteforce">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">iterator</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bincodes.extract-module.html#listfiles" class="summary-sig-name">listfiles</a>(<span class="summary-sig-arg">argv</span>)</span><br />
+      Yields all filenames, expanding glob wildcards.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bincodes.extract-pysrc.html#listfiles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr class="private">
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="bincodes.extract-module.html#main" class="summary-sig-name" onclick="show_private();">main</a>()</span><br />
+      This function is called when the module is run as a command line 
+      script.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="bincodes.extract-pysrc.html#main">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+</table>
+<!-- ==================== VARIABLES ==================== -->
+<a name="section-Variables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-Variables"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">regexp</span>
+    </td><td class="summary">
+        <a href="bincodes.extract-module.html#rcc_strict" class="summary-name">rcc_strict</a> = <code title="re.compile(r'[^0-9](?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|\
+5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?\
+:2131|1800|35\d{3})\d{11})[^0-9]')">re.compile(r'<code class="re-group">[</code><code class="re-op">^</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">(?:</code>4<code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{12}</code><code class="re-group">(?:</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{3}</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-op">|</code>5<code class="re-group">[</code>1<code class="variable-ellipsis">...</code></code><br />
+      Strict credit card number matching.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">regexp</span>
+    </td><td class="summary">
+        <a href="bincodes.extract-module.html#rcc_loose" class="summary-name">rcc_loose</a> = <code title="re.compile(r'\b(?:\d[ -;,\.:\t\r\n]*?){13,16}\b')">re.compile(r'\b<code class="re-group">(?:</code>\d<code class="re-group">[</code> <code class="re-op">-</code>;,\.:\t\r\n<code class="re-group">]</code><code class="re-op">*?</code><code class="re-group">)</code><code class="re-op">{13,16}</code>\b')</code><br />
+      Relaxed credit card number matching.
+    </td>
+  </tr>
+</table>
+<!-- ==================== FUNCTION DETAILS ==================== -->
+<a name="section-FunctionDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Function Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-FunctionDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="is_luhn_valid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">is_luhn_valid</span>(<span class="sig-arg">cc</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bincodes.extract-pysrc.html#is_luhn_valid">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Validate a credit card number using the Luhn algorithm.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cc</code></strong> (str) - Credit card number.</li>
+    </ul></dd>
+    <dt>Returns: bool</dt>
+        <dd><code>True</code> if the credit card number appears to be valid.</dd>
+  </dl>
+<div class="fields">      <p><strong>See Also:</strong>
+        <a href="http://en.wikipedia.org/wiki/Luhn_algorithm" 
+        target="_top">http://en.wikipedia.org/wiki/Luhn_algorithm</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="strip"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">strip</span>(<span class="sig-arg">cc</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bincodes.extract-pysrc.html#strip">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Strip all non numeric characters.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>cc</code></strong> (str) - String.</li>
+    </ul></dd>
+    <dt>Returns: str</dt>
+        <dd>Stripped string.</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="extract"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">extract</span>(<span class="sig-arg">data</span>,
+        <span class="sig-arg">rcc</span>=<span class="sig-default">re.compile(r'\b<code class="re-group">(?:</code>\d<code class="re-group">[</code> <code class="re-op">-</code>;,\.:\t\r\n<code class="re-group">]</code><code class="re-op">*?</code><code class="re-group">)</code><code class="re-op">{13,16}</code>\b')</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bincodes.extract-pysrc.html#extract">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Extract credit card numbers from plain text data.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> (str) - Plain text to analyze.</li>
+        <li><strong class="pname"><code>rcc</code></strong> (regexp) - Regular expression to use. See <a 
+          href="bincodes.extract-module.html#rcc_strict" 
+          class="link">rcc_strict</a> and <a 
+          href="bincodes.extract-module.html#rcc_loose" 
+          class="link">rcc_loose</a>. Defaults to <code>rcc_loose</code>.</li>
+    </ul></dd>
+    <dt>Returns: iterator</dt>
+        <dd>Yields seemingly valid credit card numbers. See <a 
+          href="bincodes.extract-module.html#is_luhn_valid" 
+          class="link">is_luhn_valid</a>. To get all results at once, for 
+          example to sort them, do the following:
+<pre class="literalblock">
+   cc_list = list(extract(data))
+   cc_list.sort()
+</pre>
+          <p>There may be repeated entries, so you can also do this to 
+          remove them:</p>
+<pre class="literalblock">
+   cc_set = set(extract(data))
+</pre></dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bruteforce"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">bruteforce</span>(<span class="sig-arg">data</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bincodes.extract-pysrc.html#bruteforce">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Extract credit card numbers from plain text data by brute force.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>data</code></strong> (str) - Plain text to analyze.</li>
+    </ul></dd>
+    <dt>Returns: iterator</dt>
+        <dd>Yields seemingly valid credit card numbers.</dd>
+  </dl>
+<div class="fields">      <p><strong>Warning:</strong>
+        May yield a large number of false positives!
+      </p>
+      <p><strong>See Also:</strong>
+        <a href="bincodes.extract-module.html#extract" 
+        class="link">extract</a>
+      </p>
+</div></td></tr></table>
+</div>
+<a name="listfiles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">listfiles</span>(<span class="sig-arg">argv</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bincodes.extract-pysrc.html#listfiles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Yields all filenames, expanding glob wildcards.</p>
+  <dl class="fields">
+    <dt>Parameters:</dt>
+    <dd><ul class="nomargin-top">
+        <li><strong class="pname"><code>argv</code></strong> (list(str)) - List of filenames, glob wildcards, or the special value 
+          &quot;-&quot;.</li>
+    </ul></dd>
+    <dt>Returns: iterator</dt>
+        <dd>Filenames.</dd>
+  </dl>
+<div class="fields">      <p><strong>Warning:</strong>
+        Filenames are not guaranteed to exist.
+      </p>
+</div></td></tr></table>
+</div>
+<a name="main"></a>
+<div class="private">
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">main</span>()</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="bincodes.extract-pysrc.html#main">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This function is called when the module is run as a command line 
+  script.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== VARIABLES DETAILS ==================== -->
+<a name="section-VariablesDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td colspan="2" class="table-header">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+      <tr valign="top">
+        <td align="left"><span class="table-header">Variables Details</span></td>
+        <td align="right" valign="top"
+         ><span class="options">[<a href="#section-VariablesDetails"
+         class="privatelink" onclick="toggle_private();"
+         >hide private</a>]</span></td>
+      </tr>
+    </table>
+  </td>
+</tr>
+</table>
+<a name="rcc_strict"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">rcc_strict</h3>
+  Strict credit card number matching. See: <a 
+  href="http://www.regular-expressions.info/creditcard.html" 
+  target="_top">http://www.regular-expressions.info/creditcard.html</a>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>regexp</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'<code class="re-group">[</code><code class="re-op">^</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">(?:</code>4<code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{12}</code><code class="re-group">(?:</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{3}</code><code class="re-group">)</code><code class="re-op">?</code><code class="re-op">|</code>5<code class="re-group">[</code>1<code class="re-op">-</code>5<code class="re-group">]</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{14}</code><code class="re-op">|</code>6<code class="re-group">(?:</code>011<code class="re-op">|</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+5<code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">)</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{12}</code><code class="re-op">|</code>3<code class="re-group">[</code>47<code class="re-group">]</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{13}</code><code class="re-op">|</code>3<code class="re-group">(?:</code>0<code class="re-group">[</code>0<code class="re-op">-</code>5<code class="re-group">]</code><code class="re-op">|</code><code class="re-group">[</code>68<code class="re-group">]</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-group">)</code><code class="re-group">[</code>0<code class="re-op">-</code>9<code class="re-group">]</code><code class="re-op">{11}</code><code class="re-op">|</code><code class="re-group">(?</code><span class="variable-linewrap"><img src="crarr.png" alt="\" /></span>
+<code class="re-group">:</code>2131<code class="re-op">|</code>1800<code class="re-op">|</code>35\d<code class="re-op">{3}</code><code class="re-group">)</code>\d<code class="re-op">{11}</code><code class="re-group">)</code><code class="re-group">[</code><code class="re-op">^</code>0<code class="re-op">-</code>9<code class="re-group">]</code>')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rcc_loose"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">rcc_loose</h3>
+  Relaxed credit card number matching. See: <a 
+  href="http://www.regular-expressions.info/creditcard.html" 
+  target="_top">http://www.regular-expressions.info/creditcard.html</a>
+  <dl class="fields">
+    <dt>Type:</dt>
+      <dd>regexp</dd>
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+re.compile(r'\b<code class="re-group">(?:</code>\d<code class="re-group">[</code> <code class="re-op">-</code>;,\.:\t\r\n<code class="re-group">]</code><code class="re-op">*?</code><code class="re-group">)</code><code class="re-op">{13,16}</code>\b')
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov  4 12:35:22 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,382 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>bincodes.report</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Package&nbsp;bincodes ::
+        Module&nbsp;report
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+        <tr><td align="right"><span class="options">[<a href="javascript:void(0);" class="privatelink"
+    onclick="toggle_private();">hide&nbsp;private</a>]</span></td></tr>
+        <tr><td align="right"><span class="options"
+            >[<a href="frames.html" target="_top">frames</a
+            >]&nbsp;|&nbsp;<a href="bincodes.report-pysrc.html"
+            target="_top">no&nbsp;frames</a>]</span></td></tr>
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="bincodes.report-module.html">Module bincodes.report</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-comment">#!/usr/bin/env python</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-comment"></tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-docstring">"""Extract all credit card numbers from a list of plain text files and produce a report.</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-docstring">@type mii: tuple(str)</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-docstring">@type brand: tuple of tuple(str, regexp)</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"><tt class="py-docstring">@var mii: Array of credit card types.</tt> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-docstring">    The index of the array is the first digit of the credit card number.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"><tt class="py-docstring">    See: U{http://www.merriampark.com/anatomycc.htm}</tt> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-docstring">@var brand: Regular expressions to match each credit card issuer.</tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-docstring">    Do not use them with the L{extract.extract} function, they are written for</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-docstring">    matching rather than searching.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-docstring">    See: U{http://www.regular-expressions.info/creditcard.html}</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-docstring"></tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-docstring">@type header_row: list(str)</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-docstring">@var header_row: Default header row for report tables.</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-docstring">"""</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-name">__all__</tt> <tt class="py-op">=</tt> <tt class="py-op">[</tt><tt class="py-string">'mii'</tt><tt class="py-op">,</tt> <tt class="py-string">'brand'</tt><tt class="py-op">,</tt> <tt class="py-string">'BincodesDB'</tt><tt class="py-op">,</tt> <tt class="py-string">'Table'</tt><tt class="py-op">,</tt> <tt class="py-string">'pretty'</tt><tt class="py-op">,</tt> <tt class="py-string">'report'</tt><tt class="py-op">,</tt> <tt class="py-string">'extract_and_report'</tt><tt class="py-op">]</tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">glob</tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">re</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line">    <tt class="py-keyword">import</tt> <tt class="py-name">sqlite3</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line">    <tt class="py-keyword">from</tt> <tt class="py-name">pysqlite2</tt> <tt class="py-keyword">import</tt> <tt class="py-name">dbapi2</tt> <tt class="py-keyword">as</tt> <tt class="py-name">sqlite3</tt> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">texttable</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">HTML</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt id="link-0" class="py-name" targets="Module bincodes.extract=bincodes.extract-module.html,Function bincodes.extract.extract()=bincodes.extract-module.html#extract"><a title="bincodes.extract
+bincodes.extract.extract" class="py-name" href="#" onclick="return doclink('link-0', 'extract', 'link-0');">extract</a></tt> <tt class="py-keyword">import</tt> <tt id="link-1" class="py-name" targets="Function bincodes.extract.listfiles()=bincodes.extract-module.html#listfiles"><a title="bincodes.extract.listfiles" class="py-name" href="#" onclick="return doclink('link-1', 'listfiles', 'link-1');">listfiles</a></tt><tt class="py-op">,</tt> <tt id="link-2" class="py-name"><a title="bincodes.extract
+bincodes.extract.extract" class="py-name" href="#" onclick="return doclink('link-2', 'extract', 'link-0');">extract</a></tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"><tt class="py-comment"># http://www.merriampark.com/anatomycc.htm</tt> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-3" class="py-name" targets="Variable bincodes.report.mii=bincodes.report-module.html#mii"><a title="bincodes.report.mii" class="py-name" href="#" onclick="return doclink('link-3', 'mii', 'link-3');">mii</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">    <tt class="py-string">"ISO/TC 68 and other industry assignments"</tt><tt class="py-op">,</tt> </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line">    <tt class="py-string">"Airlines"</tt><tt class="py-op">,</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">    <tt class="py-string">"Airlines and other industry assignments"</tt><tt class="py-op">,</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line">    <tt class="py-string">"Travel and entertainment"</tt><tt class="py-op">,</tt> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line">    <tt class="py-string">"Banking and financial"</tt><tt class="py-op">,</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line">    <tt class="py-string">"Banking and financial"</tt><tt class="py-op">,</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line">    <tt class="py-string">"Merchandizing and banking"</tt><tt class="py-op">,</tt> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line">    <tt class="py-string">"Petroleum"</tt><tt class="py-op">,</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">    <tt class="py-string">"Telecommunications and other industry assignment"</tt><tt class="py-op">,</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">    <tt class="py-string">"National assignment"</tt><tt class="py-op">,</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"><tt class="py-op">)</tt> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt class="py-comment"># http://www.regular-expressions.info/creditcard.html</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt class="py-comment"></tt><tt id="link-4" class="py-name" targets="Variable bincodes.report.brand=bincodes.report-module.html#brand"><a title="bincodes.report.brand" class="py-name" href="#" onclick="return doclink('link-4', 'brand', 'link-4');">brand</a></tt> <tt class="py-op">=</tt> <tt class="py-op">(</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-string">"Visa"</tt>                      <tt class="py-op">,</tt>   <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">"^4[0-9]{12}(?:[0-9]{3})?$"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-string">"MasterCard"</tt>                <tt class="py-op">,</tt>   <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">"^5[1-5][0-9]{14}$"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-string">"American Express"</tt>          <tt class="py-op">,</tt>   <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">"^3[47][0-9]{13}$"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-string">"Diner's Club/Carte Blanche"</tt><tt class="py-op">,</tt>   <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">"^3(?:0[0-5]|[68][0-9])[0-9]{11}$"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-string">"Discover"</tt>                  <tt class="py-op">,</tt>   <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">"^6(?:011|5[0-9]{2})[0-9]{12}$"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line">    <tt class="py-op">(</tt><tt class="py-string">"JCB"</tt>                       <tt class="py-op">,</tt>   <tt class="py-name">re</tt><tt class="py-op">.</tt><tt class="py-name">compile</tt><tt class="py-op">(</tt><tt class="py-string">"^(?:2131|1800|35\d{3})\d{11}$"</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"><tt class="py-op">)</tt> </tt>
+<a name="L59"></a><tt class="py-lineno"> 59</tt>  <tt class="py-line"> </tt>
+<a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line"><tt id="link-5" class="py-name" targets="Variable bincodes.report.header_row=bincodes.report-module.html#header_row"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-5', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">=</tt><tt class="py-op">[</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">    <tt class="py-string">'Number'</tt><tt class="py-op">,</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">    <tt class="py-string">'Issuer'</tt><tt class="py-op">,</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">    <tt class="py-string">'Brand'</tt><tt class="py-op">,</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">    <tt class="py-string">'Industry'</tt><tt class="py-op">,</tt> </tt>
+<a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line">    <tt class="py-string">'Country'</tt><tt class="py-op">,</tt> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line">    <tt class="py-string">'Contact'</tt><tt class="py-op">,</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"><tt class="py-op">]</tt> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="Table"></a><div id="Table-def"><a name="L69"></a><tt class="py-lineno"> 69</tt> <a class="py-toggle" href="#" id="Table-toggle" onclick="return toggle('Table');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bincodes.report.Table-class.html">Table</a><tt class="py-op">:</tt> </tt>
+</div><div id="Table-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="Table-expanded"><a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line">    <tt class="py-docstring">"""Text or HTML table.</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-docstring">    @type html: bool</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-docstring">    @type table: texttable.Texttable or HTML.Table</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar html: C{True} for HTML, C{False} for plain text.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar table: Actual table object.</tt> </tt>
+<a name="L75"></a><tt class="py-lineno"> 75</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line"> </tt>
+<a name="Table.__init__"></a><div id="Table.__init__-def"><a name="L77"></a><tt class="py-lineno"> 77</tt> <a class="py-toggle" href="#" id="Table.__init__-toggle" onclick="return toggle('Table.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.Table-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">html</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">header_row</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Table.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Table.__init__-expanded"><a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line"><tt class="py-docstring">        @type html: bool</tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line"><tt class="py-docstring">        @type header_row: list(str)</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line"><tt class="py-docstring">        @param html: C{True} for HTML, C{False} for plain text.</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line"><tt class="py-docstring">        @param header_row: Optional header row.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">html</tt> <tt class="py-op">=</tt> <tt class="py-name">html</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">html</tt><tt class="py-op">:</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-6" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-6', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt> <tt class="py-op">=</tt> <tt class="py-name">HTML</tt><tt class="py-op">.</tt><tt id="link-7" class="py-name" targets="Class bincodes.report.Table=bincodes.report.Table-class.html"><a title="bincodes.report.Table" class="py-name" href="#" onclick="return doclink('link-7', 'Table', 'link-7');">Table</a></tt><tt class="py-op">(</tt><tt id="link-8" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-8', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">=</tt><tt id="link-9" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-9', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt> <tt class="py-op">=</tt> <tt class="py-name">HTML</tt><tt class="py-op">.</tt><tt id="link-10" class="py-name"><a title="bincodes.report.Table" class="py-name" href="#" onclick="return doclink('link-10', 'Table', 'link-7');">Table</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt> <tt class="py-op">=</tt> <tt class="py-name">texttable</tt><tt class="py-op">.</tt><tt class="py-name">Texttable</tt><tt class="py-op">(</tt><tt class="py-name">max_width</tt><tt class="py-op">=</tt><tt class="py-number">140</tt><tt class="py-op">)</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt id="link-11" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-11', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L93"></a><tt class="py-lineno"> 93</tt>  <tt class="py-line">                <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt><tt class="py-op">.</tt><tt id="link-12" class="py-name" targets="Method bincodes.report.Table.add_row()=bincodes.report.Table-class.html#add_row"><a title="bincodes.report.Table.add_row" class="py-name" href="#" onclick="return doclink('link-12', 'add_row', 'link-12');">add_row</a></tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-string">'*%s*'</tt> <tt class="py-op">%</tt> <tt class="py-name">x</tt> <tt class="py-keyword">for</tt> <tt class="py-name">x</tt> <tt class="py-keyword">in</tt> <tt id="link-13" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-13', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line"> </tt>
+<a name="Table.add_row"></a><div id="Table.add_row-def"><a name="L95"></a><tt class="py-lineno"> 95</tt> <a class="py-toggle" href="#" id="Table.add_row-toggle" onclick="return toggle('Table.add_row');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.Table-class.html#add_row">add_row</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">row</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Table.add_row-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Table.add_row-expanded"><a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line">        <tt class="py-docstring">"""Add a row to the table.</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line"><tt class="py-docstring">        @type row: list(str)</tt> </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-docstring">        @param row: Row of text.</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">html</tt><tt class="py-op">:</tt> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt><tt class="py-op">.</tt><tt class="py-name">rows</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt class="py-name">row</tt><tt class="py-op">)</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt><tt class="py-op">.</tt><tt id="link-14" class="py-name"><a title="bincodes.report.Table.add_row" class="py-name" href="#" onclick="return doclink('link-14', 'add_row', 'link-12');">add_row</a></tt><tt class="py-op">(</tt><tt class="py-name">row</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line"> </tt>
+<a name="Table.draw"></a><div id="Table.draw-def"><a name="L105"></a><tt class="py-lineno">105</tt> <a class="py-toggle" href="#" id="Table.draw-toggle" onclick="return toggle('Table.draw');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.Table-class.html#draw">draw</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="Table.draw-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="Table.draw-expanded"><a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line">        <tt class="py-docstring">"""Dump the resulting table as a text string.</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: str</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"><tt class="py-docstring">        @return: Text or HTML table.</tt> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">html</tt><tt class="py-op">:</tt> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line">            <tt class="py-keyword">return</tt> <tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt><tt class="py-op">)</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">table</tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method bincodes.report.Table.draw()=bincodes.report.Table-class.html#draw"><a title="bincodes.report.Table.draw" class="py-name" href="#" onclick="return doclink('link-15', 'draw', 'link-15');">draw</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line">    <tt class="py-name">__str__</tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name"><a title="bincodes.report.Table.draw" class="py-name" href="#" onclick="return doclink('link-16', 'draw', 'link-15');">draw</a></tt> </tt>
+</div><a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB"></a><div id="BincodesDB-def"><a name="L116"></a><tt class="py-lineno">116</tt> <a class="py-toggle" href="#" id="BincodesDB-toggle" onclick="return toggle('BincodesDB');">-</a><tt class="py-line"><tt class="py-keyword">class</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html">BincodesDB</a><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="BincodesDB-expanded"><a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line">    <tt class="py-docstring">"""Bincodes database.</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-docstring">    @type db: sqlite3.Connection</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"><tt class="py-docstring">    @type cursor: sqlite3.Cursor</tt> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt class="py-docstring">    @type filename: str</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar db: SQLite connection object.</tt> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar cursor: SQLite cursor object.</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-docstring">    @ivar filename: SQLite databse filename.</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB.__init__"></a><div id="BincodesDB.__init__-def"><a name="L126"></a><tt class="py-lineno">126</tt> <a class="py-toggle" href="#" id="BincodesDB.__init__-toggle" onclick="return toggle('BincodesDB.__init__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html#__init__">__init__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">filename</tt><tt class="py-op">=</tt><tt class="py-name">None</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB.__init__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BincodesDB.__init__-expanded"><a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line">        <tt class="py-docstring">"""</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-docstring">        @type filename: str</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-docstring">        @param filename: Database filename.</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">filename</tt><tt class="py-op">:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line">            <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">split</tt><tt class="py-op">(</tt><tt class="py-name">__file__</tt><tt class="py-op">)</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">filename</tt><tt class="py-op">:</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line">                <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-string">'.'</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line">            <tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'bincodes.db'</tt><tt class="py-op">)</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">filename</tt> <tt class="py-op">=</tt> <tt class="py-name">filename</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">db</tt> <tt class="py-op">=</tt> <tt class="py-name">sqlite3</tt><tt class="py-op">.</tt><tt class="py-name">connect</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">)</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">text_factory</tt> <tt class="py-op">=</tt> <tt class="py-name">str</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">db</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB.__del__"></a><div id="BincodesDB.__del__-def"><a name="L141"></a><tt class="py-lineno">141</tt> <a class="py-toggle" href="#" id="BincodesDB.__del__-toggle" onclick="return toggle('BincodesDB.__del__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html#__del__">__del__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB.__del__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BincodesDB.__del__-expanded"><a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Method bincodes.report.BincodesDB.close()=bincodes.report.BincodesDB-class.html#close"><a title="bincodes.report.BincodesDB.close" class="py-name" href="#" onclick="return doclink('link-17', 'close', 'link-17');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line">        <tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line">            <tt class="py-keyword">pass</tt> </tt>
+</div><a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB.__enter__"></a><div id="BincodesDB.__enter__-def"><a name="L147"></a><tt class="py-lineno">147</tt> <a class="py-toggle" href="#" id="BincodesDB.__enter__-toggle" onclick="return toggle('BincodesDB.__enter__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html#__enter__">__enter__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB.__enter__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BincodesDB.__enter__-expanded"><a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">self</tt> </tt>
+</div><a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB.__exit__"></a><div id="BincodesDB.__exit__-def"><a name="L150"></a><tt class="py-lineno">150</tt> <a class="py-toggle" href="#" id="BincodesDB.__exit__-toggle" onclick="return toggle('BincodesDB.__exit__');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html#__exit__">__exit__</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">type</tt><tt class="py-op">,</tt> <tt class="py-param">value</tt><tt class="py-op">,</tt> <tt class="py-param">traceback</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB.__exit__-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BincodesDB.__exit__-expanded"><a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt class="py-name">False</tt> </tt>
+</div><a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB.close"></a><div id="BincodesDB.close-def"><a name="L153"></a><tt class="py-lineno">153</tt> <a class="py-toggle" href="#" id="BincodesDB.close-toggle" onclick="return toggle('BincodesDB.close');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html#close">close</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB.close-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BincodesDB.close-expanded"><a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line">        <tt class="py-docstring">"Close the database."</tt> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line">        <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="bincodes.report.BincodesDB.close" class="py-name" href="#" onclick="return doclink('link-18', 'close', 'link-17');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line">        <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line">            <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">db</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name"><a title="bincodes.report.BincodesDB.close" class="py-name" href="#" onclick="return doclink('link-19', 'close', 'link-17');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"> </tt>
+<a name="BincodesDB.fetch"></a><div id="BincodesDB.fetch-def"><a name="L160"></a><tt class="py-lineno">160</tt> <a class="py-toggle" href="#" id="BincodesDB.fetch-toggle" onclick="return toggle('BincodesDB.fetch');">-</a><tt class="py-line">    <tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report.BincodesDB-class.html#fetch">fetch</a><tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">cc</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="BincodesDB.fetch-collapsed" style="display:none;" pad="+++" indent="++++++++"></div><div id="BincodesDB.fetch-expanded"><a name="L161"></a><tt class="py-lineno">161</tt>  <tt class="py-line">        <tt class="py-docstring">"""Fetch relevant information from the credit card number.</tt> </tt>
+<a name="L162"></a><tt class="py-lineno">162</tt>  <tt class="py-line"><tt class="py-docstring">        @type cc: str</tt> </tt>
+<a name="L163"></a><tt class="py-lineno">163</tt>  <tt class="py-line"><tt class="py-docstring">        @param cc: Credit card number.</tt> </tt>
+<a name="L164"></a><tt class="py-lineno">164</tt>  <tt class="py-line"><tt class="py-docstring">        @rtype: tuple(str, str, str, str, str, str)</tt> </tt>
+<a name="L165"></a><tt class="py-lineno">165</tt>  <tt class="py-line"><tt class="py-docstring">        @return:</tt> </tt>
+<a name="L166"></a><tt class="py-lineno">166</tt>  <tt class="py-line"><tt class="py-docstring">            Some or all of the following:</tt> </tt>
+<a name="L167"></a><tt class="py-lineno">167</tt>  <tt class="py-line"><tt class="py-docstring">             - Credit card number, sanitized with L{pretty}.</tt> </tt>
+<a name="L168"></a><tt class="py-lineno">168</tt>  <tt class="py-line"><tt class="py-docstring">             - Issuer entity.</tt> </tt>
+<a name="L169"></a><tt class="py-lineno">169</tt>  <tt class="py-line"><tt class="py-docstring">             - Card brand (see L{brand}).</tt> </tt>
+<a name="L170"></a><tt class="py-lineno">170</tt>  <tt class="py-line"><tt class="py-docstring">             - Card industry type (see L{mii}).</tt> </tt>
+<a name="L171"></a><tt class="py-lineno">171</tt>  <tt class="py-line"><tt class="py-docstring">             - Country of origin.</tt> </tt>
+<a name="L172"></a><tt class="py-lineno">172</tt>  <tt class="py-line"><tt class="py-docstring">             - Bank's customer support telephone number.</tt> </tt>
+<a name="L173"></a><tt class="py-lineno">173</tt>  <tt class="py-line"><tt class="py-docstring">            Missing fields are returned as C{None}.</tt> </tt>
+<a name="L174"></a><tt class="py-lineno">174</tt>  <tt class="py-line"><tt class="py-docstring">        """</tt> </tt>
+<a name="L175"></a><tt class="py-lineno">175</tt>  <tt class="py-line">        <tt class="py-name">industria</tt> <tt class="py-op">=</tt> <tt id="link-20" class="py-name"><a title="bincodes.report.mii" class="py-name" href="#" onclick="return doclink('link-20', 'mii', 'link-3');">mii</a></tt><tt class="py-op">[</tt><tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt><tt class="py-op">]</tt> </tt>
+<a name="L176"></a><tt class="py-lineno">176</tt>  <tt class="py-line">        <tt class="py-name">marca</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L177"></a><tt class="py-lineno">177</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">b</tt><tt class="py-op">,</tt> <tt class="py-name">rb</tt> <tt class="py-keyword">in</tt> <tt id="link-21" class="py-name"><a title="bincodes.report.brand" class="py-name" href="#" onclick="return doclink('link-21', 'brand', 'link-4');">brand</a></tt><tt class="py-op">:</tt> </tt>
+<a name="L178"></a><tt class="py-lineno">178</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">rb</tt><tt class="py-op">.</tt><tt class="py-name">match</tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L179"></a><tt class="py-lineno">179</tt>  <tt class="py-line">                <tt class="py-name">marca</tt> <tt class="py-op">=</tt> <tt class="py-name">b</tt> </tt>
+<a name="L180"></a><tt class="py-lineno">180</tt>  <tt class="py-line">                <tt class="py-keyword">break</tt> </tt>
+<a name="L181"></a><tt class="py-lineno">181</tt>  <tt class="py-line">        <tt class="py-name">bincode</tt> <tt class="py-op">=</tt> <tt class="py-name">int</tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">:</tt><tt class="py-number">6</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L182"></a><tt class="py-lineno">182</tt>  <tt class="py-line">        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">execute</tt><tt class="py-op">(</tt><tt class="py-string">"select * from bincodes where bincode=?"</tt><tt class="py-op">,</tt> <tt class="py-op">(</tt><tt class="py-name">bincode</tt><tt class="py-op">,</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L183"></a><tt class="py-lineno">183</tt>  <tt class="py-line">        <tt class="py-name">result</tt> <tt class="py-op">=</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt class="py-name">cursor</tt><tt class="py-op">.</tt><tt class="py-name">fetchall</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L184"></a><tt class="py-lineno">184</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">result</tt><tt class="py-op">:</tt> </tt>
+<a name="L185"></a><tt class="py-lineno">185</tt>  <tt class="py-line">            <tt class="py-name">bincode</tt><tt class="py-op">,</tt> <tt class="py-name">entidad</tt><tt class="py-op">,</tt> <tt class="py-name">pais</tt><tt class="py-op">,</tt> <tt class="py-name">telefono</tt> <tt class="py-op">=</tt> <tt class="py-name">result</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt> </tt>
+<a name="L186"></a><tt class="py-lineno">186</tt>  <tt class="py-line">        <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L187"></a><tt class="py-lineno">187</tt>  <tt class="py-line">            <tt class="py-name">entidad</tt>  <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L188"></a><tt class="py-lineno">188</tt>  <tt class="py-line">            <tt class="py-name">pais</tt>     <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L189"></a><tt class="py-lineno">189</tt>  <tt class="py-line">            <tt class="py-name">telefono</tt> <tt class="py-op">=</tt> <tt class="py-name">None</tt> </tt>
+<a name="L190"></a><tt class="py-lineno">190</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> <tt id="link-22" class="py-name" targets="Function bincodes.report.pretty()=bincodes.report-module.html#pretty"><a title="bincodes.report.pretty" class="py-name" href="#" onclick="return doclink('link-22', 'pretty', 'link-22');">pretty</a></tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-name">entidad</tt><tt class="py-op">,</tt> <tt class="py-name">marca</tt><tt class="py-op">,</tt> <tt class="py-name">industria</tt><tt class="py-op">,</tt> <tt class="py-name">pais</tt><tt class="py-op">,</tt> <tt class="py-name">telefono</tt> </tt>
+</div></div><a name="L191"></a><tt class="py-lineno">191</tt>  <tt class="py-line"> </tt>
+<a name="pretty"></a><div id="pretty-def"><a name="L192"></a><tt class="py-lineno">192</tt> <a class="py-toggle" href="#" id="pretty-toggle" onclick="return toggle('pretty');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report-module.html#pretty">pretty</a><tt class="py-op">(</tt><tt class="py-param">cc</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="pretty-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="pretty-expanded"><a name="L193"></a><tt class="py-lineno">193</tt>  <tt class="py-line">    <tt class="py-docstring">"""Sanitize a credit card number for user display.</tt> </tt>
+<a name="L194"></a><tt class="py-lineno">194</tt>  <tt class="py-line"><tt class="py-docstring">    @type cc: str</tt> </tt>
+<a name="L195"></a><tt class="py-lineno">195</tt>  <tt class="py-line"><tt class="py-docstring">    @param cc: Credit card number.</tt> </tt>
+<a name="L196"></a><tt class="py-lineno">196</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: str</tt> </tt>
+<a name="L197"></a><tt class="py-lineno">197</tt>  <tt class="py-line"><tt class="py-docstring">    @return: Credit card number.</tt> </tt>
+<a name="L198"></a><tt class="py-lineno">198</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L199"></a><tt class="py-lineno">199</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-string">'-'</tt><tt class="py-op">.</tt><tt class="py-name">join</tt><tt class="py-op">(</tt><tt class="py-op">[</tt><tt class="py-name">cc</tt><tt class="py-op">[</tt><tt class="py-name">i</tt><tt class="py-op">:</tt><tt class="py-name">i</tt><tt class="py-op">+</tt><tt class="py-number">4</tt><tt class="py-op">]</tt> <tt class="py-keyword">for</tt> <tt class="py-name">i</tt> <tt class="py-keyword">in</tt> <tt class="py-name">xrange</tt><tt class="py-op">(</tt><tt class="py-number">0</tt><tt class="py-op">,</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">)</tt><tt class="py-op">,</tt> <tt class="py-number">4</tt><tt class="py-op">)</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L200"></a><tt class="py-lineno">200</tt>  <tt class="py-line"> </tt>
+<a name="report"></a><div id="report-def"><a name="L201"></a><tt class="py-lineno">201</tt> <a class="py-toggle" href="#" id="report-toggle" onclick="return toggle('report');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report-module.html#report">report</a><tt class="py-op">(</tt><tt class="py-param">cclist</tt><tt class="py-op">,</tt> <tt class="py-param">html</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="report-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="report-expanded"><a name="L202"></a><tt class="py-lineno">202</tt>  <tt class="py-line">    <tt class="py-docstring">"""Produce a report for a list of credit card numbers.</tt> </tt>
+<a name="L203"></a><tt class="py-lineno">203</tt>  <tt class="py-line"><tt class="py-docstring">    @see: L{BincodesDB.fetch}</tt> </tt>
+<a name="L204"></a><tt class="py-lineno">204</tt>  <tt class="py-line"><tt class="py-docstring">    @type cclist: list(str)</tt> </tt>
+<a name="L205"></a><tt class="py-lineno">205</tt>  <tt class="py-line"><tt class="py-docstring">    @type html: bool</tt> </tt>
+<a name="L206"></a><tt class="py-lineno">206</tt>  <tt class="py-line"><tt class="py-docstring">    @param cclist: List of credit card numbers.</tt> </tt>
+<a name="L207"></a><tt class="py-lineno">207</tt>  <tt class="py-line"><tt class="py-docstring">    @param html: C{True} for an HTML report, C{False} for a plain text report.</tt> </tt>
+<a name="L208"></a><tt class="py-lineno">208</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: Table</tt> </tt>
+<a name="L209"></a><tt class="py-lineno">209</tt>  <tt class="py-line"><tt class="py-docstring">    @return: Text or HTML table.</tt> </tt>
+<a name="L210"></a><tt class="py-lineno">210</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L211"></a><tt class="py-lineno">211</tt>  <tt class="py-line">    <tt class="py-name">bincodes</tt> <tt class="py-op">=</tt> <tt id="link-23" class="py-name" targets="Class bincodes.report.BincodesDB=bincodes.report.BincodesDB-class.html"><a title="bincodes.report.BincodesDB" class="py-name" href="#" onclick="return doclink('link-23', 'BincodesDB', 'link-23');">BincodesDB</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L212"></a><tt class="py-lineno">212</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L213"></a><tt class="py-lineno">213</tt>  <tt class="py-line">        <tt class="py-name">table</tt> <tt class="py-op">=</tt> <tt id="link-24" class="py-name"><a title="bincodes.report.Table" class="py-name" href="#" onclick="return doclink('link-24', 'Table', 'link-7');">Table</a></tt><tt class="py-op">(</tt><tt class="py-name">html</tt><tt class="py-op">,</tt> <tt id="link-25" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-25', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L214"></a><tt class="py-lineno">214</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">cc</tt> <tt class="py-keyword">in</tt> <tt class="py-name">cclist</tt><tt class="py-op">:</tt> </tt>
+<a name="L215"></a><tt class="py-lineno">215</tt>  <tt class="py-line">            <tt class="py-name">table</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name"><a title="bincodes.report.Table.add_row" class="py-name" href="#" onclick="return doclink('link-26', 'add_row', 'link-12');">add_row</a></tt><tt class="py-op">(</tt><tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">bincodes</tt><tt class="py-op">.</tt><tt id="link-27" class="py-name" targets="Method bincodes.report.BincodesDB.fetch()=bincodes.report.BincodesDB-class.html#fetch"><a title="bincodes.report.BincodesDB.fetch" class="py-name" href="#" onclick="return doclink('link-27', 'fetch', 'link-27');">fetch</a></tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">)</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L216"></a><tt class="py-lineno">216</tt>  <tt class="py-line">    <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L217"></a><tt class="py-lineno">217</tt>  <tt class="py-line">        <tt class="py-name">bincodes</tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="bincodes.report.BincodesDB.close" class="py-name" href="#" onclick="return doclink('link-28', 'close', 'link-17');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L218"></a><tt class="py-lineno">218</tt>  <tt class="py-line">    <tt class="py-keyword">return</tt> <tt class="py-name">table</tt> </tt>
+</div><a name="L219"></a><tt class="py-lineno">219</tt>  <tt class="py-line"> </tt>
+<a name="extract_and_report"></a><div id="extract_and_report-def"><a name="L220"></a><tt class="py-lineno">220</tt> <a class="py-toggle" href="#" id="extract_and_report-toggle" onclick="return toggle('extract_and_report');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report-module.html#extract_and_report">extract_and_report</a><tt class="py-op">(</tt><tt class="py-param">argv</tt><tt class="py-op">,</tt> <tt class="py-param">html</tt><tt class="py-op">=</tt><tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-param">matching_only</tt><tt class="py-op">=</tt><tt class="py-name">True</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="extract_and_report-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="extract_and_report-expanded"><a name="L221"></a><tt class="py-lineno">221</tt>  <tt class="py-line">    <tt class="py-docstring">"""Extract all credit card numbers from a list of plain text files</tt> </tt>
+<a name="L222"></a><tt class="py-lineno">222</tt>  <tt class="py-line"><tt class="py-docstring">    and produce a report.</tt> </tt>
+<a name="L223"></a><tt class="py-lineno">223</tt>  <tt class="py-line"><tt class="py-docstring">    @see: L{BincodesDB.fetch}</tt> </tt>
+<a name="L224"></a><tt class="py-lineno">224</tt>  <tt class="py-line"><tt class="py-docstring">    @type argv: list(str)</tt> </tt>
+<a name="L225"></a><tt class="py-lineno">225</tt>  <tt class="py-line"><tt class="py-docstring">    @type html: bool</tt> </tt>
+<a name="L226"></a><tt class="py-lineno">226</tt>  <tt class="py-line"><tt class="py-docstring">    @type matching_only: bool</tt> </tt>
+<a name="L227"></a><tt class="py-lineno">227</tt>  <tt class="py-line"><tt class="py-docstring">    @param argv: List of filenames, glob wildcards, or the special value "-".</tt> </tt>
+<a name="L228"></a><tt class="py-lineno">228</tt>  <tt class="py-line"><tt class="py-docstring">        See: L{extract.listfiles}</tt> </tt>
+<a name="L229"></a><tt class="py-lineno">229</tt>  <tt class="py-line"><tt class="py-docstring">    @param html: C{True} for an HTML report, C{False} for a plain text report.</tt> </tt>
+<a name="L230"></a><tt class="py-lineno">230</tt>  <tt class="py-line"><tt class="py-docstring">    @param matching_only: C{True} to show only credit cards that match known</tt> </tt>
+<a name="L231"></a><tt class="py-lineno">231</tt>  <tt class="py-line"><tt class="py-docstring">        bincodes, C{False} to show all credit cards.</tt> </tt>
+<a name="L232"></a><tt class="py-lineno">232</tt>  <tt class="py-line"><tt class="py-docstring">    @rtype: iterator of (str, Table)</tt> </tt>
+<a name="L233"></a><tt class="py-lineno">233</tt>  <tt class="py-line"><tt class="py-docstring">    @return: Yields tuples with the filename and the report for that file.</tt> </tt>
+<a name="L234"></a><tt class="py-lineno">234</tt>  <tt class="py-line"><tt class="py-docstring">    """</tt> </tt>
+<a name="L235"></a><tt class="py-lineno">235</tt>  <tt class="py-line">    <tt class="py-name">found</tt> <tt class="py-op">=</tt> <tt class="py-name">set</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L236"></a><tt class="py-lineno">236</tt>  <tt class="py-line">    <tt class="py-name">bincodes</tt> <tt class="py-op">=</tt> <tt id="link-29" class="py-name"><a title="bincodes.report.BincodesDB" class="py-name" href="#" onclick="return doclink('link-29', 'BincodesDB', 'link-23');">BincodesDB</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L237"></a><tt class="py-lineno">237</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L238"></a><tt class="py-lineno">238</tt>  <tt class="py-line">        <tt class="py-keyword">for</tt> <tt class="py-name">filename</tt> <tt class="py-keyword">in</tt> <tt id="link-30" class="py-name"><a title="bincodes.extract.listfiles" class="py-name" href="#" onclick="return doclink('link-30', 'listfiles', 'link-1');">listfiles</a></tt><tt class="py-op">(</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L239"></a><tt class="py-lineno">239</tt>  <tt class="py-line">            <tt class="py-keyword">if</tt> <tt class="py-name">filename</tt> <tt class="py-op">!=</tt> <tt class="py-string">'-'</tt><tt class="py-op">:</tt> </tt>
+<a name="L240"></a><tt class="py-lineno">240</tt>  <tt class="py-line">                <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">open</tt><tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-string">'r'</tt><tt class="py-op">)</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L241"></a><tt class="py-lineno">241</tt>  <tt class="py-line">            <tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L242"></a><tt class="py-lineno">242</tt>  <tt class="py-line">                <tt class="py-name">data</tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">stdin</tt><tt class="py-op">.</tt><tt class="py-name">read</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L243"></a><tt class="py-lineno">243</tt>  <tt class="py-line">            <tt class="py-name">table</tt> <tt class="py-op">=</tt> <tt id="link-31" class="py-name"><a title="bincodes.report.Table" class="py-name" href="#" onclick="return doclink('link-31', 'Table', 'link-7');">Table</a></tt><tt class="py-op">(</tt><tt class="py-name">html</tt><tt class="py-op">,</tt> <tt id="link-32" class="py-name"><a title="bincodes.report.header_row" class="py-name" href="#" onclick="return doclink('link-32', 'header_row', 'link-5');">header_row</a></tt><tt class="py-op">)</tt> </tt>
+<a name="L244"></a><tt class="py-lineno">244</tt>  <tt class="py-line">            <tt class="py-keyword">for</tt> <tt class="py-name">cc</tt> <tt class="py-keyword">in</tt> <tt id="link-33" class="py-name"><a title="bincodes.extract
+bincodes.extract.extract" class="py-name" href="#" onclick="return doclink('link-33', 'extract', 'link-0');">extract</a></tt><tt class="py-op">(</tt><tt class="py-name">data</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L245"></a><tt class="py-lineno">245</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">cc</tt> <tt class="py-keyword">not</tt> <tt class="py-keyword">in</tt> <tt class="py-name">found</tt><tt class="py-op">:</tt> </tt>
+<a name="L246"></a><tt class="py-lineno">246</tt>  <tt class="py-line">                    <tt class="py-name">row</tt> <tt class="py-op">=</tt> <tt class="py-name">list</tt><tt class="py-op">(</tt><tt class="py-name">bincodes</tt><tt class="py-op">.</tt><tt id="link-34" class="py-name"><a title="bincodes.report.BincodesDB.fetch" class="py-name" href="#" onclick="return doclink('link-34', 'fetch', 'link-27');">fetch</a></tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">)</tt><tt class="py-op">)</tt> </tt>
+<a name="L247"></a><tt class="py-lineno">247</tt>  <tt class="py-line">                    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">matching_only</tt> <tt class="py-keyword">or</tt> <tt class="py-name">row</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt> <tt class="py-keyword">is</tt> <tt class="py-keyword">not</tt> <tt class="py-name">None</tt><tt class="py-op">:</tt> </tt>
+<a name="L248"></a><tt class="py-lineno">248</tt>  <tt class="py-line">                        <tt class="py-name">table</tt><tt class="py-op">.</tt><tt id="link-35" class="py-name"><a title="bincodes.report.Table.add_row" class="py-name" href="#" onclick="return doclink('link-35', 'add_row', 'link-12');">add_row</a></tt><tt class="py-op">(</tt><tt class="py-name">row</tt><tt class="py-op">)</tt> </tt>
+<a name="L249"></a><tt class="py-lineno">249</tt>  <tt class="py-line">                    <tt class="py-name">found</tt><tt class="py-op">.</tt><tt class="py-name">add</tt><tt class="py-op">(</tt><tt class="py-name">cc</tt><tt class="py-op">)</tt> </tt>
+<a name="L250"></a><tt class="py-lineno">250</tt>  <tt class="py-line">            <tt class="py-keyword">yield</tt> <tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">table</tt><tt class="py-op">)</tt> </tt>
+<a name="L251"></a><tt class="py-lineno">251</tt>  <tt class="py-line">    <tt class="py-keyword">finally</tt><tt class="py-op">:</tt> </tt>
+<a name="L252"></a><tt class="py-lineno">252</tt>  <tt class="py-line">        <tt class="py-name">bincodes</tt><tt class="py-op">.</tt><tt id="link-36" class="py-name"><a title="bincodes.report.BincodesDB.close" class="py-name" href="#" onclick="return doclink('link-36', 'close', 'link-17');">close</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+</div><a name="L253"></a><tt class="py-lineno">253</tt>  <tt class="py-line"> </tt>
+<a name="main"></a><div id="main-def"><a name="L254"></a><tt class="py-lineno">254</tt> <a class="py-toggle" href="#" id="main-toggle" onclick="return toggle('main');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="bincodes.report-module.html#main">main</a><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="main-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="main-expanded"><a name="L255"></a><tt class="py-lineno">255</tt>  <tt class="py-line">    <tt class="py-docstring">"This function is called when the module is run as a command line script."</tt> </tt>
+<a name="L256"></a><tt class="py-lineno">256</tt>  <tt class="py-line">    <tt class="py-name">argv</tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">:</tt><tt class="py-op">]</tt> </tt>
+<a name="L257"></a><tt class="py-lineno">257</tt>  <tt class="py-line">    <tt class="py-keyword">if</tt> <tt class="py-keyword">not</tt> <tt class="py-name">argv</tt><tt class="py-op">:</tt> </tt>
+<a name="L258"></a><tt class="py-lineno">258</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">os</tt> </tt>
+<a name="L259"></a><tt class="py-lineno">259</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Credit card number extractor + bincode analysis"</tt> </tt>
+<a name="L260"></a><tt class="py-lineno">260</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"%s &lt;text file&gt; [text file...]"</tt> <tt class="py-op">%</tt> <tt class="py-name">os</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">basename</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">0</tt><tt class="py-op">]</tt><tt class="py-op">)</tt> </tt>
+<a name="L261"></a><tt class="py-lineno">261</tt>  <tt class="py-line">        <tt class="py-keyword">return</tt> </tt>
+<a name="L262"></a><tt class="py-lineno">262</tt>  <tt class="py-line">    <tt class="py-keyword">for</tt> <tt class="py-op">(</tt><tt class="py-name">filename</tt><tt class="py-op">,</tt> <tt class="py-name">table</tt><tt class="py-op">)</tt> <tt class="py-keyword">in</tt> <tt id="link-37" class="py-name" targets="Function bincodes.report.extract_and_report()=bincodes.report-module.html#extract_and_report"><a title="bincodes.report.extract_and_report" class="py-name" href="#" onclick="return doclink('link-37', 'extract_and_report', 'link-37');">extract_and_report</a></tt><tt class="py-op">(</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L263"></a><tt class="py-lineno">263</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-string">"Results for %s:"</tt> <tt class="py-op">%</tt> <tt class="py-name">filename</tt> </tt>
+<a name="L264"></a><tt class="py-lineno">264</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> <tt class="py-name">table</tt><tt class="py-op">.</tt><tt id="link-38" class="py-name"><a title="bincodes.report.Table.draw" class="py-name" href="#" onclick="return doclink('link-38', 'draw', 'link-15');">draw</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L265"></a><tt class="py-lineno">265</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt> </tt>
+</div><a name="L266"></a><tt class="py-lineno">266</tt>  <tt class="py-line"> </tt>
+<a name="L267"></a><tt class="py-lineno">267</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">__name__</tt> <tt class="py-op">==</tt> <tt class="py-string">"__main__"</tt><tt class="py-op">:</tt> </tt>
+<a name="L268"></a><tt class="py-lineno">268</tt>  <tt class="py-line">    <tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L269"></a><tt class="py-lineno">269</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt class="py-name">psyco</tt> </tt>
+<a name="L270"></a><tt class="py-lineno">270</tt>  <tt class="py-line">        <tt class="py-name">psyco</tt><tt class="py-op">.</tt><tt class="py-name">full</tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L271"></a><tt class="py-lineno">271</tt>  <tt class="py-line">    <tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L272"></a><tt class="py-lineno">272</tt>  <tt class="py-line">        <tt class="py-keyword">pass</tt> </tt>
+<a name="L273"></a><tt class="py-lineno">273</tt>  <tt class="py-line">    <tt id="link-39" class="py-name" targets="Function bincodes.extract.main()=bincodes.extract-module.html#main,Function bincodes.report.main()=bincodes.report-module.html#main"><a title="bincodes.extract.main
+bincodes.report.main" class="py-name" href="#" onclick="return doclink('link-39', 'main', 'link-39');">main</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt> </tt>
+<a name="L274"></a><tt class="py-lineno">274</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+      <th class="navbar" width="100%"></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Thu Nov  4 12:35:22 2010
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

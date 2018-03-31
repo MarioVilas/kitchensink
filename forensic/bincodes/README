@@ -1,0 +1,18 @@
+Requirements:
+- apt-get install python-sqlite3
+
+Install as a module (optional):
+- sudo python setup.py install
+
+Scripts:
+- extract.py: Searches for credit card numbers in the given file
+- report.py: Same as extract but also dumps additional information
+
+Examples:
+
+- Find all credit cards in the given file and show them on screen:
+    ./extract.py cards.txt
+
+- Generate a text report on the credit cards found:
+    ./report.py cards.txt > report.txt
+

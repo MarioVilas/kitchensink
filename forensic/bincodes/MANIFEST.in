@@ -1,0 +1,6 @@
+include *.py
+include bincodes.db
+include *.sh
+include MANIFEST.in
+include README
+include html/*
