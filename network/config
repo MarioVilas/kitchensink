@@ -1,6 +1,9 @@
 # OpenSSH client configuration
 # Mario Vilas (https://github.com/MarioVilas)
 
+# Send keepalives to prevent SSH sessions for timing out.
+ServerAliveInterval 120
+
 # Optionally enable this insecure algorithm.
 # Required to log in to some old boxes.
 #KexAlgorithms +diffie-hellman-group1-sha1
@@ -9,6 +12,7 @@
 
 # Example host configuration.
 # Add a different key for each host!
+# Make sure to enable pubkey authentication.
 Host example
 	Host 192.168.1.1
 	Port 22222
@@ -31,7 +35,9 @@ Host *
 	AddressFamily inet
 
 	# Prevents the "too many authentication attempts" SSH bug.
-	RSAAuthentication no
+	# This is why we re-enable pubkey auth for each host.
+	# Note: RSAAuthentication is unsupported in newer versions.
+	#RSAAuthentication no
 	PubkeyAuthentication no
 	IdentitiesOnly yes
 
