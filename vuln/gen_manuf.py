@@ -52,6 +52,18 @@ r = re.compile(
     r"(.+)"
 )
 
+import os.path
+if not os.path.exists("manuf.txt"):
+    import shutil
+    import urllib2
+    url = "https://code.wireshark.org/review/gitweb?p=wireshark.git;a=blob_plain;f=manuf;hb=HEAD"
+    print "Downloading from: %s" % url
+    req = urllib2.Request(url)
+    req.add_header("User-Agent", "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:79.0) Gecko/20100101 Firefox/79.0")
+    src = urllib2.urlopen(req)
+    with open("manuf.txt", "wb") as dst:
+        shutil.copyfileobj(src, dst)
+
 import codecs
 d = {}
 with codecs.open("manuf.txt", "rU", "utf-8") as f:

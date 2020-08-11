@@ -1,10 +1,6 @@
 official-cpe-dictionary_v2.3.*
 nvdcve-2.0*
-manuf.db
-manuf.dbm
-manuf.marshal
-manuf.pickle
-manuf.py
+manuf.*
 
 *.py[cod]
 
