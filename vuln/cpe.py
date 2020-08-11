@@ -546,7 +546,7 @@ if __name__ == "__main__":
     if title == "win32":
         title = "windows " + platform.win32_ver()[0]
     elif title.startswith("linux"):
-        title, version = platform.linux_distribution()[:1]
+        title, version = platform.linux_distribution()[:2]
         #target_hw = platform.uname()[-1]
     elif title == "mac":
         title = "mac os x"

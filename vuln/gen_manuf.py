@@ -244,7 +244,7 @@ for i in xrange(1000):
 print "SQLite3: %s to access from scratch." % numpy.mean(td)
 
 """
-Results on my machine:
+Results on my machine (2013):
 
 Pickle: 0.103633332253 seconds to load.
 C Pickle: 0.030119998455 seconds to load.
@@ -262,4 +262,49 @@ SQLite3: 0.00040499997139 to access from scratch.
   776,393 manuf.pickle
   938,882 manuf.py
 1,335,564 manuf.txt
+
+------------------------------------------------------------------------------
+
+Results again in 2020, before updating manuf.txt:
+
+Pickle: 0.0336551427841 seconds to load.
+C Pickle: 0.0095471739769 seconds to load.
+Marshal: 0.00561310052872 seconds to load.
+Dict: 6.17473125458e-07 to access.
+AnyDBM: 9.07230377197e-05 seconds to load.
+AnyDBM: 5.89835643768e-06 to access.
+SQLite3: 2.39644050598e-05 seconds to load.
+SQLite3: 9.15317058563e-06 to access.
+SQLite3: 9.27138328552e-05 to access from scratch.
+
+-rw-r--r-- 1 mario mario 1150976 ago 11 15:21 manuf.db
+-rw-r--r-- 1 mario mario 1306624 ago 11 15:21 manuf.dbm
+-rw-r--r-- 1 mario mario 1004757 ago 11 15:21 manuf.marshal
+-rw-r--r-- 1 mario mario  776393 ago 11 15:21 manuf.pickle
+-rw-r--r-- 1 mario mario  921067 ago 11 15:21 manuf.py
+-rw-r--r-- 1 mario mario 1335564 ene  9  2020 manuf.txt
+
+Python marshalling got somewhat better but database support went horribly wrong...
+
+After updating manuf.txt from here:
+    https://gitlab.com/wireshark/wireshark/raw/master/manuf
+
+Pickle: 1.41302744548e-05 seconds to load.
+C Pickle: 7.3504447937e-06 seconds to load.
+Marshal: 5.3596496582e-06 seconds to load.
+Dict: 5.85944652557e-07 to access.
+AnyDBM: 8.98447036743e-05 seconds to load.
+AnyDBM: 5.99348783493e-06 to access.
+SQLite3: 2.36549377441e-05 seconds to load.
+SQLite3: 8.59124422073e-06 to access.
+SQLite3: 9.4655752182e-05 to access from scratch.
+
+-rw-r--r-- 1 mario mario   12288 ago 11 15:26 manuf.db
+-rw-r--r-- 1 mario mario 1306624 ago 11 15:26 manuf.dbm
+-rw-r--r-- 1 mario mario      91 ago 11 15:26 manuf.marshal
+-rw-r--r-- 1 mario mario      89 ago 11 15:26 manuf.pickle
+-rw-r--r-- 1 mario mario     174 ago 11 15:26 manuf.py
+-rw-r--r-- 1 mario mario 1734797 ago 11 15:26 manuf.txt
+
+It's interesting to see how each method scales differently as the database grows larger :)
 """

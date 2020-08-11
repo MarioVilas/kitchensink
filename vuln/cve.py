@@ -205,6 +205,9 @@ class CVEDB(object):
     https://nvd.nist.gov/download.cfm#CVE_FEED
     """
 
+    # XXX TODO no longer working, need to switch to JSON feed
+    # https://gist.github.com/christiangalsterer/5f55389b9c50c74c31b9
+
     # Set to False to suppress prints
     DEBUG = True
 

@@ -379,3 +379,5 @@ if __name__ == "__main__":
                 print(CVSS(vector))
     else:
         test()
+
+# TODO add support for v3
